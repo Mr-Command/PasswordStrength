@@ -1,0 +1,96 @@
+﻿<Window x:Class="PasswordStrength.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PasswordStrength"
+        mc:Ignorable="d"
+        Title="Şifre Güçlük Kontrolü" Height="520" Width="800" Background="#388695">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Şifre Giriş Kısmı -->
+        <Label Content="Şifrenizi Giriniz:" Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <PasswordBox x:Name="passwordBox" Grid.Column="0" Margin="0,5,10,5"/>
+            <ToggleButton x:Name="showPasswordButton" Grid.Column="1" Content="👁" Width="30"
+                         Click="ShowPasswordButton_Click" Background="AliceBlue"/>
+        </Grid>
+
+        <!-- Kontrol Etme Butonu -->
+        <Button Content="Kontrol Et" Grid.Row="2" Margin="602,7,24,8"
+                Click="CheckButton_Click" Background="AliceBlue"/>
+
+        <!-- Şifre Güç Göstergesi -->
+        <ProgressBar x:Name="strengthBar" Grid.Row="3" Height="20" 
+                     Minimum="0" Maximum="100" Value="0" Background="AliceBlue"/>
+        <TextBlock x:Name="strengthText" Grid.Row="4" Margin="0,5,0,10"
+                  HorizontalAlignment="Center" />
+
+        <!-- Şifre Gereksinimleri -->
+        <GroupBox Header="Şifre Gereksinimleri" Grid.Row="5" Margin="0,10">
+            <StackPanel Margin="10">
+                <TextBlock x:Name="lengthCheck" Text="❌ En az 8 karakter"/>
+                <TextBlock x:Name="upperCheck" Text="❌ En az 1 büyük harf"/>
+                <TextBlock x:Name="lowerCheck" Text="❌ En az 1 küçük harf"/>
+                <TextBlock x:Name="numberCheck" Text="❌ En az 1 sayı"/>
+                <TextBlock x:Name="specialCheck" Text="❌ En az 1 özel karakter"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Şifre Önerileri -->
+        <Button Content="Güçlü Şifre Öner" Grid.Row="6" Margin="0,5"
+                Click="SuggestPassword_Click" Background="AliceBlue"/>
+
+        <!-- Şifre Güvenlik İpuçları -->
+        <GroupBox Header="Güvenlik İpuçları" Grid.Row="7" Margin="0,10,0,20" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#F5F5F5" CornerRadius="5" Margin="5">
+                    <TextBlock x:Name="currentTip" 
+                             TextWrapping="Wrap" 
+                             Margin="10" 
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             FontSize="14"/>
+                </Border>
+
+                <StackPanel Grid.Row="1" 
+                          Orientation="Horizontal" 
+                          HorizontalAlignment="Center" 
+                          Margin="0,10,0,0">
+                    <Button x:Name="prevTipButton" 
+                            Content="←" 
+                            Width="80"
+                            Click="PrevTipButton_Click" Background="AliceBlue"/>
+                    <TextBlock x:Name="tipCounter" 
+                             VerticalAlignment="Center" 
+                             Margin="10,0"/>
+                    <Button x:Name="nextTipButton" 
+                            Content="→" 
+                            Width="80" 
+                            Margin="10,0,0,0"
+                            Click="NextTipButton_Click" Background="AliceBlue"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
